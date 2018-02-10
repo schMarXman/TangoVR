@@ -6,25 +6,27 @@ public class FingerPlacer : MonoBehaviour
 {
     public GameObject fingerPrefab;
 
+    //public GameObject PointMarker;
+
     private GameObject placedFinger;
 
     private Vector3 fingerPlacementPosition;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightControl) || Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.RightControl) || Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton2))
         {
             DestroyFinger();
         }
 
-        if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.RightControl) || Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.JoystickButton2))
         {
             InteractionRay.Instance.lineRenderer.enabled = true;
             DrawLine();
             TestFingerPlacement();
         }
 
-        if (Input.GetKeyUp(KeyCode.RightControl) || Input.GetKeyUp(KeyCode.LeftControl))
+        if (Input.GetKeyUp(KeyCode.RightControl) || Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.JoystickButton2))
         {
             InteractionRay.Instance.lineRenderer.enabled = false;
             PlaceFinger();

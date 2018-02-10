@@ -8,18 +8,20 @@ public class Teleporter : MonoBehaviour
 
     private bool teleportationPossible = false;
 
+    public GameObject PointMarker;
+
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton5))
         {
             TestForTeleport();
             InteractionRay.Instance.lineRenderer.enabled = true;
             ShowLine(teleportationPossible);
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.JoystickButton5))
         {
-           InteractionRay.Instance.lineRenderer.enabled = false;
+            InteractionRay.Instance.lineRenderer.enabled = false;
             Teleport();
         }
     }
@@ -46,10 +48,13 @@ public class Teleporter : MonoBehaviour
             if (teleportPossible)
             {
                 lineRenderer.endColor = Color.green;
+                PointMarker.SetActive(true);
+                PointMarker.transform.position = hit.point;
             }
             else
             {
                 lineRenderer.endColor = Color.red;
+                PointMarker.SetActive(false);
             }
         }
         else
@@ -65,6 +70,8 @@ public class Teleporter : MonoBehaviour
             var point = InteractionRay.Instance.hitInfo.point;
 
             transform.position = new Vector3(point.x, transform.position.y, point.z);
+
+            PointMarker.SetActive(false);
         }
     }
 }
