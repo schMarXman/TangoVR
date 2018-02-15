@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JengaBuilder : MonoBehaviour
 {
+    public static JengaBuilder Instance;
+
     [SerializeField]
     private GameObject blockPrefab;
 
@@ -13,6 +15,7 @@ public class JengaBuilder : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
         //BuildTower(7);
     }
 
